@@ -4,6 +4,7 @@ import javax.swing.JInternalFrame;
 
 import cn.edu.jsu.zct.factory.ServiceFactory;
 import cn.edu.jsu.zct.util.IOOperation;
+import cn.edu.jsu.zct.util.POIOperation;
 import cn.edu.jsu.zct.vo.Account;
 import cn.edu.jsu.zct.vo.AccountFactory;
 import cn.edu.jsu.zct.vo.User_;
@@ -72,6 +73,7 @@ public class AccountQueryInternalFrame extends JInternalFrame {
 	private JPanel panS;
 	private JLabel label;
 	private JLabel lblTotal;
+	private JButton btnexcel;
 	
 	/**
 	 * Create the frame.
@@ -89,7 +91,7 @@ public class AccountQueryInternalFrame extends JInternalFrame {
 		
 		panW = new JPanel();
 		getContentPane().add(panW, BorderLayout.WEST);
-		panW.setLayout(new GridLayout(13, 1, 1, 1));
+		panW.setLayout(new GridLayout(14, 1, 1, 1));
 		
 		button = new JButton("\u589E\u52A0");
 		button.addActionListener(new ActionListener() {
@@ -153,6 +155,19 @@ public class AccountQueryInternalFrame extends JInternalFrame {
 		
 		btnTxt = new JButton("\u5BFC\u51FAtxt");
 		panW.add(btnTxt);
+		
+		btnexcel = new JButton("\u5BFC\u51FAexcel");
+		btnexcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					POIOperation.excelExport(exportList());
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(null, "µ¼³öÊ§°Ü");
+					e.printStackTrace();
+				}
+			}
+		});
+		panW.add(btnexcel);
 		btnTxt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
